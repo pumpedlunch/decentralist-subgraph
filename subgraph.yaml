@@ -1,0 +1,47 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: list1
+    network: goerli
+    source:
+      address: "0x2B5faD0faF2da210cAA7ed072778dAf00E95D3cc"
+      abi: list1
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - BondSet
+        - Initialized
+        - LivenessSet
+        - OwnershipTransferred
+        - RevisionApproved
+        - RevisionExecuted
+        - RevisionProposed
+        - RevisionRejected
+        - RewardsSet
+      abis:
+        - name: list1
+          file: ./abis/list1.json
+      eventHandlers:
+        - event: BondSet(uint256)
+          handler: handleBondSet
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: LivenessSet(uint64)
+          handler: handleLivenessSet
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: RevisionApproved(indexed uint256)
+          handler: handleRevisionApproved
+        - event: RevisionExecuted(indexed uint256)
+          handler: handleRevisionExecuted
+        - event: RevisionProposed(indexed uint256,int256,address[])
+          handler: handleRevisionProposed
+        - event: RevisionRejected(indexed uint256)
+          handler: handleRevisionRejected
+        - event: RewardsSet(uint256,uint256)
+          handler: handleRewardsSet
+      file: ./src/list-1.ts
