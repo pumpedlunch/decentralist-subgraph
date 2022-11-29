@@ -1,75 +1,15 @@
-type BondSet @entity(immutable: true) {
-  id: Bytes!
-  bondAmount: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Initialized @entity(immutable: true) {
-  id: Bytes!
-  version: Int! # uint8
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type LivenessSet @entity(immutable: true) {
-  id: Bytes!
-  liveness: BigInt! # uint64
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type OwnershipTransferred @entity(immutable: true) {
-  id: Bytes!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RevisionApproved @entity(immutable: true) {
-  id: Bytes!
-  revisionId: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
 type RevisionExecuted @entity(immutable: true) {
-  id: Bytes!
+  id: String! # contract address + revisionId
+  contract: Bytes! #address
   revisionId: BigInt! # uint256
+  price: BigInt!
+  revisedAddresses: [Bytes!]! # address[]
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
-type RevisionProposed @entity(immutable: true) {
-  id: Bytes!
-  revisionId: BigInt! # uint256
-  proposedPrice: BigInt! # int256
-  pendingAddresses: [Bytes]! # address[]
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RevisionRejected @entity(immutable: true) {
-  id: Bytes!
-  revisionId: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RewardsSet @entity(immutable: true) {
-  id: Bytes!
-  addReward: BigInt! # uint256
-  removeReward: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+type AddressList @entity(immutable: false) {
+  id: Bytes! # contract address
+  addresses: [Bytes!] # address[]
 }
